@@ -23,7 +23,7 @@ Módulos **FAKETEC** y **MASN**: los dos llevan una placa **Nice!Nano / Pro Micr
 | FAKETEC | MASN |
 |:---:|:---:|
 | <img src="docs/img/modulo-faketec.png" alt="Módulo FAKETEC: Pro Micro nRF52840 roja y módulo LoRa sobre placa verde" width="320"> | <img src="docs/img/modulo-masn.png" alt="Módulo MASN montado en caja estanca, con la placa MASN y la Pro Micro nRF52840" width="400"> |
-| Pro Micro nRF52840 + módulo LoRa sobre la placa FAKETEC (verde). | Placa MASN (rotulada «MASN») con la Pro Micro nRF52840 y el LoRa, montada en caja estanca. |
+| Pro Micro nRF52840 + módulo LoRa sobre la placa FAKETEC (verde). | Placa MASN |
 
 ## Descarga y uso
 
