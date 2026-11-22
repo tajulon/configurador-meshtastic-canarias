@@ -1,0 +1,16 @@
+# --- Datos privados: NUNCA subir ---
+# Backups de nodos (contienen claves privadas y credenciales)
+backups/
+X5-*
+*-backup-completo.*
+*.cfg
+
+# --- Ficheros de trabajo / generados ---
+plantilla-otros-modulos.yaml
+ConfiguradorMeshtastic.zip
+ConfiguradorMeshtastic/ConfiguradorMeshtastic.exe
+build/
+dist/
+*.spec
+__pycache__/
+*.pyc

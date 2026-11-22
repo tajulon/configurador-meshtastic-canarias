@@ -1,0 +1,130 @@
+CONFIGURADOR MESHTASTIC PARA MÓDULOS FAKETEC CON NICE!NANO
+==========================================================
+Realizado por Eduardo, EA8II
+
+Software para configurar módulos Faketec basados en Nice!Nano (nRF52840)
+con firmware Meshtastic: aplica la configuración completa de plantilla.yaml
+y el nombre que le indiques. Funciona en cualquier
+Windows 10/11 de 64 bits: no hay que instalar nada ni hace falta Internet
+(Python, meshtastic, todas las dependencias, el bootloader y el firmware
+van dentro del .exe).
+
+¡ATENCIÓN! CONFIGURACIÓN PARA CANARIAS
+  Los canales incluidos en plantilla.yaml (canal principal LongFast +
+  "Canarias" + "Emergencias") y la configuración de radio (región EU_868,
+  modo LONG_FAST) son los predeterminados de la red Meshtastic de CANARIAS.
+  En la Península u otras zonas los canales y el modo pueden ser distintos:
+  consulta a tu comunidad Meshtastic local y ajusta plantilla.yaml antes de
+  usar el programa.
+
+CONTENIDO
+  ConfiguradorMeshtastic.exe   El programa.
+  plantilla.yaml               La configuración que se aplica (canales, LoRa,
+                               MQTT, telemetría, módulos...). Sin claves ni
+                               nombre: cada nodo conserva su identidad propia.
+  backups\                     Se crea sola. Guarda una copia completa de cada
+                               nodo configurado (contiene sus claves privadas:
+                               no la compartas).
+
+REQUISITOS DE LA PLACA
+  La placa necesita dos cosas. El programa comprueba ambas y NO configura
+  una placa a la que le falte alguna. Puede instalarlas él mismo:
+    - Placa que YA tiene Meshtastic: para actualizarla, el programa la
+      pone sola en modo bootloader (no hay que pulsar nada).
+    - Placa nueva o sin Meshtastic: tienes que pulsar el botón RESET dos
+      veces cuando te lo pida (no hay firmware que reciba la orden).
+
+  1. Bootloader UF2 (las Nice!Nano lo traen de fábrica).
+     - Si es anterior a 0.9.2, el programa ofrece actualizarlo con el
+       incluido (update-nice_nano_bootloader-0.9.2_nosd.uf2). No
+       desconectes la placa durante la actualización.
+     - Si la placa NO tiene bootloader (al pulsar dos veces RESET no
+       aparece ninguna unidad USB), el programa no puede ayudar: hay que
+       grabarlo con un programador SWD (J-Link, ST-Link, Raspberry Pi Pico
+       con "debugprobe"...). Bootloader: Adafruit_nRF52_Bootloader,
+       variante "nice_nano"
+       (github.com/adafruit/Adafruit_nRF52_Bootloader/releases).
+
+  2. Firmware Meshtastic para "nRF52 Pro-micro DIY"
+     (firmware-nrf52_promicro_diy_tcxo-<versión>.uf2).
+     - Con Internet: el programa consulta la última versión estable (la
+       misma lista que usa https://flasher.meshtastic.org) y, si es más
+       nueva que la incluida, descarga solo el fichero de este dispositivo.
+     - Sin Internet: usa el incluido (2.7.26.54e0d8d).
+     - Se instala SIEMPRE automáticamente esa versión: en placas nuevas y
+       en placas con un Meshtastic más antiguo (se actualizan antes de
+       configurarlas). Si la placa tiene una versión más nueva que la
+       última estable (p. ej. una alpha), no se toca.
+
+  Qué hace el programa según lo que encuentra:
+    - Placa en modo bootloader (unidad USB tipo NICENANO): muestra la
+      versión del bootloader y del SoftDevice, pregunta si actualizar el
+      bootloader cuando es antiguo, e instala el firmware.
+    - Placa que no responde como Meshtastic: te pide pulsar RESET dos
+      veces para instalar el firmware. No la configura hasta entonces.
+    - Placa con Meshtastic: comprueba el modelo (Faketec =
+      NRF52_PROMICRO_DIY) y la versión del firmware; si hay una más nueva,
+      la actualiza (entrando solo en modo bootloader, sin RESET).
+    - Ninguna placa: explica cómo comprobar el bootloader.
+
+USO
+  1. Cierra Meshtastic Web, la app de Meshtastic o cualquier programa que
+     esté usando el puerto USB de la placa.
+  2. Doble clic en ConfiguradorMeshtastic.exe. Se abre la ventana del
+     programa y, encima, las condiciones de uso: pulsa "Acepto las
+     condiciones".
+  3. Escribe el nombre del nodo (p. ej. "Prueba X7") y el nombre corto
+     (máx. 4 caracteres, p. ej. "X7") y pulsa "Configurar nodo".
+  4. Conecta la placa. Si hay que pulsar RESET dos veces (placa nueva o
+     sin Meshtastic), el recuadro de avisos lo indica en amarillo.
+  5. A partir de ahí no toques nada. La lista "Progreso" muestra cada paso:
+     buscar la placa, comprobar bootloader/firmware/modelo, instalar o
+     actualizar el firmware si hace falta, aplicar configuración y nombre,
+     verificar campo a campo y reiniciar (Bluetooth activo). Si el programa
+     necesita una decisión (p. ej. actualizar el bootloader), te la pregunta
+     en un cuadro con botones Sí/No.
+  6. Al terminar, el aviso se pone en verde con el resultado. Para el
+     siguiente nodo, cambia el nombre y vuelve a pulsar "Configurar nodo".
+
+  Otros botones: "Cancelar" (detiene el proceso; si estaba aplicando la
+  configuración, termina ese paso y reinicia el nodo para no dejarlo a
+  medias), "Abrir carpeta de backups", "Ver LEEME" y "Siempre visible"
+  (mantiene la ventana por encima de las demás). El "Registro detallado"
+  muestra todo lo que hace el programa.
+
+BLUETOOTH Y USB
+  El firmware Meshtastic APAGA el Bluetooth mientras haya un programa
+  conectado al nodo por USB (este configurador, Meshtastic Web, el CLI...)
+  y no lo vuelve a encender hasta que ese programa se desconecta o pasan
+  15 minutos. Por eso el configurador reinicia el nodo al final. Si alguna
+  vez el móvil no encuentra el nodo o no pide el PIN, reinicia el módulo
+  (o desconecta y conecta el USB) y "olvida" el dispositivo en el móvil
+  antes de volver a emparejar.
+
+NOTAS
+  - La primera vez, Windows puede mostrar "Windows protegió su PC" porque el
+    programa no está firmado: pulsa "Más información" y "Ejecutar de todas
+    formas".
+  - Si la placa ya tiene un nombre propio, el programa pide confirmación
+    antes de reconfigurarla (para no machacar un nodo por error).
+  - Si hay varios nodos conectados, pregunta cuál configurar.
+  - Para cambiar la configuración que se aplica, edita plantilla.yaml (o
+    sustitúyela por la exportación de otro nodo, quitando privateKey,
+    publicKey, owner y owner_short).
+  - Es normal la nota "neighborInfo.updateInterval: plantilla 0, el firmware
+    guarda 21600": 0 significa "por defecto" y el firmware lo sustituye él
+    solo. No afecta (Neighbor Info está desactivado).
+
+DESCARGO DE RESPONSABILIDAD
+  - Software de USO EDUCATIVO, sin fines comerciales.
+  - Se proporciona "tal cual", SIN NINGUNA GARANTÍA de funcionamiento ni de
+    idoneidad para ningún propósito.
+  - El autor no se hace responsable de daños en los equipos, pérdida de
+    datos o configuraciones, ni de cualquier otro perjuicio derivado de su
+    uso.
+  - El usuario es el único responsable de usarlo correctamente y de cumplir
+    la normativa de radio aplicable (frecuencias, potencia y ciclo de
+    trabajo).
+  - Al usar el programa aceptas estas condiciones.
+
+Eduardo, EA8II

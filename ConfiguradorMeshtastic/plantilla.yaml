@@ -1,0 +1,211 @@
+﻿# Plantilla COMPLETA (de X5, sin claves ni nombre) para otros modulos
+canned_messages: Hi|Bye|Yes|No|Ok
+channel_url: https://meshtastic.org/e/#CgcSAQE6AggNChUSAQEaCENhbmFyaWFzKAEwAToCCBIKGBIBARoLRW1lcmdlbmNpYXMoATABOgIIIBIZCAEY-gEgCygFOANABUgBUBtoAcgGAdAGAg
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+    mode: FIXED_PIN
+  device:
+    buttonGpio: 0
+    buzzerGpio: 0
+    buzzerMode: ALL_ENABLED
+    disableTripleClick: false
+    doubleTapAsButtonPress: false
+    isManaged: false
+    ledHeartbeatDisabled: false
+    nodeInfoBroadcastSecs: 10800
+    rebroadcastMode: ALL
+    role: CLIENT
+    serialEnabled: false
+    tzdef: ''
+  display:
+    autoScreenCarouselSecs: 0
+    compassNorthTop: false
+    compassOrientation: DEGREES_0
+    displaymode: DEFAULT
+    enableMessageBubbles: false
+    flipScreen: false
+    gpsFormat: UNUSED
+    headingBold: false
+    oled: OLED_AUTO
+    screenOnSecs: 600
+    units: METRIC
+    use12hClock: false
+    useLongNodeName: false
+    wakeOnTapOrMotion: false
+  lora:
+    bandwidth: 250
+    channelNum: 0
+    codingRate: 5
+    configOkToMqtt: true
+    femLnaMode: NOT_PRESENT
+    frequencyOffset: 0.0
+    hopLimit: 5
+    ignoreMqtt: false
+    modemPreset: LONG_FAST
+    overrideDutyCycle: false
+    overrideFrequency: 0.0
+    paFanDisabled: false
+    region: EU_868
+    serialHalOnly: false
+    spreadFactor: 11
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  network:
+    addressMode: DHCP
+    enabledProtocols: 0
+    ethEnabled: false
+    ipv6Enabled: false
+    ntpServer: meshtastic.pool.ntp.org
+    rsyslogServer: ''
+    wifiEnabled: false
+    wifiSsid: ''
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 300
+    fixedPosition: false
+    gpsAttemptTime: 0
+    gpsEnGpio: 24
+    gpsEnabled: false
+    gpsMode: ENABLED
+    gpsUpdateInterval: 120
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    positionFlags: 811
+    rxGpio: 0
+    txGpio: 0
+  power:
+    adcMultiplierOverride: 0.0
+    deviceBatteryInaAddress: 0
+    isPowerSaving: false
+    lsSecs: 300
+    minWakeSecs: 10
+    onBatteryShutdownAfterSecs: 0
+    powermonEnables: '0'
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    adminChannelEnabled: false
+    debugLogApiEnabled: false
+    isManaged: false
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 141
+    current: 10
+    green: 183
+    ledState: false
+    red: 98
+  audio:
+    bitrate: CODEC2_DEFAULT
+    codec2Enabled: false
+    i2sDin: 0
+    i2sSck: 0
+    i2sSd: 0
+    i2sWs: 0
+    pttPin: 0
+  cannedMessage:
+    allowInputSource: ''
+    enabled: true
+    inputbrokerEventCcw: NONE
+    inputbrokerEventCw: NONE
+    inputbrokerEventPress: NONE
+    inputbrokerPinA: 0
+    inputbrokerPinB: 0
+    inputbrokerPinPress: 0
+    rotary1Enabled: false
+    sendBell: false
+    updown1Enabled: false
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    enabled: false
+    minimumBroadcastSecs: 45
+    monitorPin: 0
+    name: ''
+    sendBell: false
+    stateBroadcastSecs: 0
+    usePullup: false
+  externalNotification:
+    active: false
+    alertBell: false
+    alertBellBuzzer: false
+    alertBellVibra: false
+    alertMessage: false
+    alertMessageBuzzer: false
+    alertMessageVibra: false
+    enabled: false
+    nagTimeout: 0
+    output: 0
+    outputBuzzer: 0
+    outputMs: 0
+    outputVibra: 0
+    useI2sAsBuzzer: false
+    usePwm: false
+  mqtt:
+    address: mqtt.meshtastic.es
+    enabled: true
+    encryptionEnabled: true
+    jsonEnabled: false
+    mapReportSettings:
+      positionPrecision: 19
+      publishIntervalSecs: 3600
+      shouldReportLocation: false
+    mapReportingEnabled: true
+    password: large4cats
+    proxyToClientEnabled: true
+    root: msh/EU_868
+    tlsEnabled: false
+    username: meshdev
+  neighborInfo:
+    enabled: false
+    transmitOverLora: false
+    updateInterval: 0
+  paxcounter:
+    bleThreshold: 0
+    enabled: false
+    paxcounterUpdateInterval: 0
+    wifiThreshold: 0
+  rangeTest:
+    clearOnReboot: false
+    enabled: false
+    save: false
+    sender: 0
+  remoteHardware:
+    allowUndefinedPinAccess: false
+    enabled: false
+  serial:
+    baud: BAUD_DEFAULT
+    echo: false
+    enabled: false
+    mode: DEFAULT
+    overrideConsoleSerialPort: false
+    rxd: 0
+    timeout: 0
+    txd: 0
+  storeForward:
+    enabled: true
+    heartbeat: false
+    historyReturnMax: 0
+    historyReturnWindow: 0
+    isServer: false
+    records: 0
+  telemetry:
+    airQualityEnabled: false
+    airQualityInterval: 0
+    airQualityScreenEnabled: false
+    deviceTelemetryEnabled: false
+    deviceUpdateInterval: 2147483647
+    environmentDisplayFahrenheit: false
+    environmentMeasurementEnabled: true
+    environmentScreenEnabled: false
+    environmentUpdateInterval: 0
+    healthMeasurementEnabled: false
+    healthScreenEnabled: false
+    healthUpdateInterval: 0
+    powerMeasurementEnabled: true
+    powerScreenEnabled: false
+    powerUpdateInterval: 1800
+ringtone: ''
