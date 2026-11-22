@@ -1,12 +1,14 @@
-# Compila ConfiguradorMeshtastic.exe (ventana de Windows, un solo fichero) y el ZIP de distribucion.
+# Compila ConfiguradorMeshtasticCanarias.exe (ventana de Windows, un solo fichero) y el ZIP de distribucion.
 # Requisitos: Windows 10/11 x64 con Python 3.12 (python.org) e Internet para descargar dependencias.
 # Uso:  powershell -ExecutionPolicy Bypass -File compilar.ps1
 # (Sin tildes a proposito: PowerShell 5.1 lee los .ps1 sin BOM como ANSI.)
 $ErrorActionPreference = 'Stop'
+$Nombre = 'ConfiguradorMeshtasticCanarias'
 $MeshtasticVersion = '2.7.11'
 $PyInstallerVersion = '6.22.3'
 
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
+$Dist = Join-Path $Root $Nombre
 # Se compila en una ruta corta para no chocar con el limite de 260 caracteres de Windows
 $B = Join-Path $env:TEMP 'cm-build'
 
@@ -35,17 +37,23 @@ Copy-Item "$Root\fuente\uf2" "$B\uf2" -Recurse
 
 Push-Location $B
 try {
-    & $VPy -m PyInstaller --noconfirm --clean --onefile --windowed --name ConfiguradorMeshtastic `
+    & $VPy -m PyInstaller --noconfirm --clean --onefile --windowed --name $Nombre `
         --hidden-import interfaz --collect-submodules meshtastic --copy-metadata meshtastic `
         --add-data "$B\uf2;uf2" --distpath "$B\dist" --workpath "$B\build" --specpath $B configurar_nodo.py
     if ($LASTEXITCODE -ne 0) { throw "Fallo PyInstaller." }
 } finally { Pop-Location }
 
-Copy-Item "$B\dist\ConfiguradorMeshtastic.exe" "$Root\ConfiguradorMeshtastic\" -Force
-$Zip = Join-Path $Root 'ConfiguradorMeshtastic.zip'
+Copy-Item "$B\dist\$Nombre.exe" $Dist -Force
+
+# ZIP solo con lo necesario (nunca backups): carpeta <Nombre>\ con exe, LEEME y plantilla
+$Stage = Join-Path $B "zip\$Nombre"
+if (Test-Path (Join-Path $B 'zip')) { Remove-Item -Recurse -Force (Join-Path $B 'zip') }
+New-Item -ItemType Directory -Force $Stage | Out-Null
+Copy-Item "$Dist\$Nombre.exe", "$Dist\LEEME.txt", "$Dist\plantilla.yaml" $Stage
+$Zip = Join-Path $Root "$Nombre.zip"
 if (Test-Path $Zip) { Remove-Item $Zip }
-Compress-Archive -Path "$Root\ConfiguradorMeshtastic\ConfiguradorMeshtastic.exe", "$Root\ConfiguradorMeshtastic\LEEME.txt", "$Root\ConfiguradorMeshtastic\plantilla.yaml" -DestinationPath $Zip
+Compress-Archive -Path $Stage -DestinationPath $Zip
 Write-Host ""
 Write-Host "Listo:" -ForegroundColor Green
-Write-Host "  $Root\ConfiguradorMeshtastic\ConfiguradorMeshtastic.exe"
+Write-Host "  $Dist\$Nombre.exe"
 Write-Host "  $Zip"

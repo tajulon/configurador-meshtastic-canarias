@@ -1,7 +1,7 @@
-# Configurador Meshtastic para módulos Faketec (Nice!Nano)
+# Configurador Meshtastic Canarias (FAKETEC y MASN)
 
-Programa de Windows para preparar módulos **Faketec** basados en **Nice!Nano (nRF52840)** con
-firmware **Meshtastic**: instala o actualiza el firmware, aplica una configuración completa
+Programa de Windows para preparar módulos **FAKETEC** y **MASN** basados en **Nice!Nano /
+Pro Micro (nRF52840)** con firmware **Meshtastic**: instala o actualiza el firmware, aplica una configuración completa
 (`plantilla.yaml`) con el nombre de nodo que indiques, comprueba campo a campo que todo ha
 quedado bien, guarda un backup y deja el nodo con el Bluetooth activo.
 
@@ -16,9 +16,9 @@ Realizado por **Eduardo, EA8II**. Software de **uso educativo** (ver descargo m�
 
 ## Descarga y uso
 
-1. Descarga `ConfiguradorMeshtastic.zip` de la sección **Releases** y descomprímelo.
+1. Descarga `ConfiguradorMeshtasticCanarias.zip` de la sección **Releases** y descomprímelo.
 2. Cierra Meshtastic Web, la app de Meshtastic o cualquier programa que use el puerto USB.
-3. Abre `ConfiguradorMeshtastic.exe` y acepta las condiciones.
+3. Abre `ConfiguradorMeshtasticCanarias.exe` y acepta las condiciones.
 4. Escribe el nombre del nodo y el nombre corto (máx. 4) y pulsa **Configurar nodo**.
 5. Conecta la placa y sigue los avisos de la ventana.
 
@@ -27,7 +27,7 @@ la librería meshtastic, el bootloader y el firmware van dentro del `.exe`. La p
 Windows puede mostrar «Windows protegió su PC» porque el programa no está firmado
 (*Más información → Ejecutar de todas formas*).
 
-Más detalles en [`ConfiguradorMeshtastic/LEEME.txt`](ConfiguradorMeshtastic/LEEME.txt).
+Más detalles en [`ConfiguradorMeshtasticCanarias/LEEME.txt`](ConfiguradorMeshtasticCanarias/LEEME.txt).
 
 ## Qué hace
 
@@ -44,12 +44,12 @@ Más detalles en [`ConfiguradorMeshtastic/LEEME.txt`](ConfiguradorMeshtastic/LEE
 - **Bluetooth**: el firmware lo apaga mientras hay una conexión USB de configuración, así que
   el programa reinicia el nodo al final para dejarlo activo.
 - No configura placas sin bootloader + firmware Meshtastic, pide confirmación antes de
-  reconfigurar un nodo que ya tiene nombre propio y avisa si el modelo no es Faketec.
+  reconfigurar un nodo que ya tiene nombre propio y avisa si el modelo no es FAKETEC / MASN.
 
 ## Estructura
 
 ```
-ConfiguradorMeshtastic/   Lo que se distribuye junto al .exe (LEEME.txt, plantilla.yaml)
+ConfiguradorMeshtasticCanarias/   Lo que se distribuye junto al .exe (LEEME.txt, plantilla.yaml)
 fuente/
   configurar_nodo.py      Núcleo: detección, bootloader, firmware, configuración, verificación
   interfaz.py             Ventana de Windows (tkinter)

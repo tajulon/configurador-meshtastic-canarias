@@ -1,4 +1,4 @@
-"""Configurador de nodos Meshtastic.
+"""Configurador Meshtastic Canarias (FAKETEC y MASN).
 
 Pide nombre largo y corto, espera a que se conecte un nodo con firmware Meshtastic,
 le aplica la plantilla completa con ese nombre, verifica campo a campo y guarda un backup.
@@ -22,14 +22,15 @@ PY = sys.executable
 BASE_DIR = os.path.dirname(sys.executable) if FROZEN else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRESENTACION = """
 ============================================================
-   CONFIGURADOR MESHTASTIC PARA MÓDULOS FAKETEC
-   con Nice!Nano (nRF52840)
+   CONFIGURADOR MESHTASTIC CANARIAS (FAKETEC Y MASN)
+   Módulos con Nice!Nano / Pro Micro nRF52840
    Realizado por Eduardo, EA8II
 ============================================================
 
- Este programa configura módulos Faketec basados en Nice!Nano
- (nRF52840) con firmware Meshtastic: les aplica la configuración
- de plantilla.yaml y el nombre de nodo que indiques.
+ Este programa configura módulos FAKETEC y MASN basados en
+ Nice!Nano / Pro Micro (nRF52840) con firmware Meshtastic: les
+ aplica la configuración de plantilla.yaml y el nombre de nodo
+ que indiques.
 
  ¡ATENCIÓN! CONFIGURACIÓN PARA CANARIAS
  --------------------------------------
@@ -176,7 +177,7 @@ def sondear(port, info=None):
 
 
 # ---------------------------------------------------------------- requisitos
-HW_FAKETEC = "NRF52_PROMICRO_DIY"   # hwModel que reporta el firmware Meshtastic para Faketec/Pro Micro
+HW_FAKETEC = "NRF52_PROMICRO_DIY"   # hwModel que reporta el firmware Meshtastic para FAKETEC / MASN (Pro Micro)
 FW_MINIMO = (2, 7)                  # la plantilla usa campos de la serie 2.7
 
 INSTR_BOOTLOADER = """
@@ -261,7 +262,7 @@ def elegir_firmware():
     v_incl = re.search(r"-(\d+\.\d+\.\d+\.[0-9a-f]+)\.uf2$", FW_INCLUIDO).group(1)
     paso("Comprobando la última versión del firmware Meshtastic")
     try:
-        req = urllib.request.Request(FW_LIST_URL, headers={"User-Agent": "ConfiguradorMeshtastic"})
+        req = urllib.request.Request(FW_LIST_URL, headers={"User-Agent": "ConfiguradorMeshtasticCanarias"})
         with urllib.request.urlopen(req, timeout=10) as r:
             lista = json.load(r)
         v_ult = lista["releases"]["stable"][0]["id"].lstrip("v")
@@ -276,7 +277,7 @@ def elegir_firmware():
         print(f"   Hay una versión más nueva: {v_ult}. Descargando...")
         try:
             os.makedirs(CACHE_DIR, exist_ok=True)
-            req = urllib.request.Request(FW_FILE_URL.format(v=v_ult), headers={"User-Agent": "ConfiguradorMeshtastic"})
+            req = urllib.request.Request(FW_FILE_URL.format(v=v_ult), headers={"User-Agent": "ConfiguradorMeshtasticCanarias"})
             with urllib.request.urlopen(req, timeout=60) as r, open(destino + ".part", "wb") as f:
                 f.write(r.read())
             os.replace(destino + ".part", destino)
@@ -362,12 +363,12 @@ def comprobar_requisitos(info, fw_disp, ya_actualizado=False):
     print("        instala a través de él).")
     print(f"   [OK] Firmware Meshtastic {fw or '?'} funcionando ({env or 'entorno ?'}).")
     if hw and hw != HW_FAKETEC:
-        print(f"   [!!] El modelo de placa es «{hw}», no «{HW_FAKETEC}» (Faketec/Nice!Nano).")
-        print("        La plantilla está pensada para Faketec; en otra placa puede no ser válida.")
+        print(f"   [!!] El modelo de placa es «{hw}», no «{HW_FAKETEC}» (FAKETEC / MASN).")
+        print("        La plantilla está pensada para FAKETEC y MASN; en otra placa puede no ser válida.")
         if not si_no("        ¿Continuar de todas formas?"):
             return "cancelar"
     elif hw:
-        print(f"   [OK] Modelo de placa: {hw} (Faketec / Nice!Nano).")
+        print(f"   [OK] Modelo de placa: {hw} (FAKETEC / MASN).")
     if version3(fw) < version3(v_disp):
         if not ya_actualizado:
             print(f"   [!!] Firmware instalado {fw or '?'}; disponible {v_disp} ({origen}).")

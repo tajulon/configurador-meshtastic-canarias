@@ -1,4 +1,4 @@
-# --- Datos privados: NUNCA subir ---
+﻿# --- Datos privados: NUNCA subir ---
 # Backups de nodos (contienen claves privadas y credenciales)
 backups/
 X5-*
@@ -7,8 +7,8 @@ X5-*
 
 # --- Ficheros de trabajo / generados ---
 plantilla-otros-modulos.yaml
-ConfiguradorMeshtastic.zip
-ConfiguradorMeshtastic/ConfiguradorMeshtastic.exe
+ConfiguradorMeshtasticCanarias.zip
+ConfiguradorMeshtasticCanarias/*.exe
 build/
 dist/
 *.spec

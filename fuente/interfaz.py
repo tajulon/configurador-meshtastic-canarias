@@ -1,4 +1,4 @@
-"""Interfaz de ventanas (tkinter) del Configurador Meshtastic para módulos Faketec.
+"""Interfaz de ventanas (tkinter) del Configurador Meshtastic Canarias (FAKETEC y MASN).
 
 Toda la lógica (detección, bootloader, firmware, configuración, verificación, backup y
 reinicio) es la del núcleo `configurar_nodo`; aquí solo se muestra y se pregunta.
@@ -11,7 +11,7 @@ import threading
 import tkinter as tk
 from tkinter import messagebox, scrolledtext, simpledialog, ttk
 
-TITULO = "Configurador Meshtastic · Faketec / Nice!Nano"
+TITULO = "Configurador Meshtastic Canarias (FAKETEC y MASN)"
 AUTOR = "Realizado por Eduardo, EA8II"
 
 # (clave, texto, fragmentos del núcleo que activan el paso)
@@ -103,9 +103,9 @@ class App:
 
         cab = tk.Frame(r, bg="#1f3b57")
         cab.grid(row=0, column=0, sticky="ew")
-        tk.Label(cab, text="Configurador Meshtastic", font=("Segoe UI", 17, "bold"),
+        tk.Label(cab, text="Configurador Meshtastic Canarias", font=("Segoe UI", 17, "bold"),
                  fg="white", bg="#1f3b57").pack(anchor="w", padx=16, pady=(10, 0))
-        tk.Label(cab, text="Módulos Faketec con Nice!Nano (nRF52840)  ·  " + AUTOR,
+        tk.Label(cab, text="Módulos FAKETEC y MASN · Nice!Nano / Pro Micro nRF52840  ·  " + AUTOR,
                  font=("Segoe UI", 10), fg="#cfe0f1", bg="#1f3b57").pack(anchor="w", padx=16, pady=(0, 10))
 
         info = ttk.Frame(r, padding=(16, 8, 16, 0))

@@ -1,10 +1,10 @@
-CONFIGURADOR MESHTASTIC PARA MÓDULOS FAKETEC CON NICE!NANO
-==========================================================
+CONFIGURADOR MESHTASTIC CANARIAS (FAKETEC Y MASN)
+=================================================
 Realizado por Eduardo, EA8II
 
-Software para configurar módulos Faketec basados en Nice!Nano (nRF52840)
-con firmware Meshtastic: aplica la configuración completa de plantilla.yaml
-y el nombre que le indiques. Funciona en cualquier
+Software para configurar módulos FAKETEC y MASN basados en Nice!Nano /
+Pro Micro (nRF52840) con firmware Meshtastic: aplica la configuración
+completa de plantilla.yaml y el nombre que le indiques. Funciona en cualquier
 Windows 10/11 de 64 bits: no hay que instalar nada ni hace falta Internet
 (Python, meshtastic, todas las dependencias, el bootloader y el firmware
 van dentro del .exe).
@@ -18,13 +18,13 @@ van dentro del .exe).
   usar el programa.
 
 CONTENIDO
-  ConfiguradorMeshtastic.exe   El programa.
-  plantilla.yaml               La configuración que se aplica (canales, LoRa,
-                               MQTT, telemetría, módulos...). Sin claves ni
-                               nombre: cada nodo conserva su identidad propia.
-  backups\                     Se crea sola. Guarda una copia completa de cada
-                               nodo configurado (contiene sus claves privadas:
-                               no la compartas).
+  ConfiguradorMeshtasticCanarias.exe   El programa.
+  plantilla.yaml       La configuración que se aplica (canales, LoRa, MQTT,
+                       telemetría, módulos...). Sin claves ni nombre: cada
+                       nodo conserva su identidad propia.
+  backups\             Se crea sola. Guarda una copia completa de cada nodo
+                       configurado (contiene sus claves privadas: no la
+                       compartas).
 
 REQUISITOS DE LA PLACA
   La placa necesita dos cosas. El programa comprueba ambas y NO configura
@@ -62,7 +62,7 @@ REQUISITOS DE LA PLACA
       bootloader cuando es antiguo, e instala el firmware.
     - Placa que no responde como Meshtastic: te pide pulsar RESET dos
       veces para instalar el firmware. No la configura hasta entonces.
-    - Placa con Meshtastic: comprueba el modelo (Faketec =
+    - Placa con Meshtastic: comprueba el modelo (FAKETEC / MASN =
       NRF52_PROMICRO_DIY) y la versión del firmware; si hay una más nueva,
       la actualiza (entrando solo en modo bootloader, sin RESET).
     - Ninguna placa: explica cómo comprobar el bootloader.
@@ -70,7 +70,7 @@ REQUISITOS DE LA PLACA
 USO
   1. Cierra Meshtastic Web, la app de Meshtastic o cualquier programa que
      esté usando el puerto USB de la placa.
-  2. Doble clic en ConfiguradorMeshtastic.exe. Se abre la ventana del
+  2. Doble clic en ConfiguradorMeshtasticCanarias.exe. Se abre la ventana del
      programa y, encima, las condiciones de uso: pulsa "Acepto las
      condiciones".
   3. Escribe el nombre del nodo (p. ej. "Prueba X7") y el nombre corto
