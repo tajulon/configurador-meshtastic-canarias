@@ -14,6 +14,17 @@ Realizado por **Eduardo, EA8II**. Software de **uso educativo** (ver descargo m�
 > canales y el modo pueden ser distintos: consulta a tu comunidad local y ajusta
 > `plantilla.yaml` antes de usar el programa.
 
+## ¿Qué módulos sirven?
+
+Módulos **FAKETEC** y **MASN**: los dos llevan una placa **Nice!Nano / Pro Micro nRF52840**
+(la placa roja con USB-C) y un módulo de radio LoRa, y usan el firmware Meshtastic
+«nRF52 Pro-micro DIY».
+
+| FAKETEC | MASN |
+|:---:|:---:|
+| <img src="docs/img/modulo-faketec.png" alt="Módulo FAKETEC: Pro Micro nRF52840 roja y módulo LoRa sobre placa verde" width="320"> | <img src="docs/img/modulo-masn.png" alt="Módulo MASN montado en caja estanca, con la placa MASN y la Pro Micro nRF52840" width="400"> |
+| Pro Micro nRF52840 + módulo LoRa sobre la placa FAKETEC (verde). | Placa MASN (rotulada «MASN») con la Pro Micro nRF52840 y el LoRa, montada en caja estanca. |
+
 ## Descarga y uso
 
 1. Descarga `ConfiguradorMeshtasticCanarias.zip` de la sección **Releases** y descomprímelo.
